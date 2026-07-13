@@ -7,6 +7,7 @@ use App\Http\Middleware\AdminAuthenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -41,6 +42,12 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,
+            ])
+            ->navigationItems([
+                NavigationItem::make('Back to Homepage')
+                    ->url('/')
+                    ->icon('heroicon-o-arrow-left')
+                    ->sort(-1),
             ])
             ->middleware([
                 EncryptCookies::class,
