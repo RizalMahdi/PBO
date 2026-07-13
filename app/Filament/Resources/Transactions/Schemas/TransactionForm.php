@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\Transactions\Schemas;
 
 use Filament\Forms\Components\Placeholder;
-use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class TransactionForm

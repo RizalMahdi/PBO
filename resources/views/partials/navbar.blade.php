@@ -25,6 +25,25 @@
                 <a href="/admin" class="text-[#4da6ff] hover:text-[#66bbff] transition-colors font-medium py-1">Admin Panel</a>
             @endif
         @endauth
+        <hr class="border-white/5 my-2 max-md:block hidden">
+        <button class="nav-cart-btn-mobile flex items-center gap-2 py-1 text-gray-400 hover:text-white transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 0a2 2 0 100 4 2 2 0 000-4z"/></svg>
+            <span>Cart</span>
+            <span class="cart-badge-mobile ml-auto bg-red-600 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full @auth @if(count($cart) > 0) @else hidden @endif @endauth @guest hidden @endguest">{{ auth()->check() ? array_sum(array_column($cart, 'quantity')) : 0 }}</span>
+        </button>
+        @auth
+            <span class="text-sm text-gray-300 font-medium py-1">{{ auth()->user()->name }}</span>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="w-full px-5 py-2 text-sm font-medium border border-gray-700 rounded-md hover:bg-white/5 transition-colors">
+                    LOGOUT
+                </button>
+            </form>
+        @else
+            <a href="{{ route('login') }}" class="w-full text-center px-5 py-2 text-sm font-medium border border-gray-700 rounded-md hover:bg-white/5 transition-colors">
+                LOGIN
+            </a>
+        @endauth
     </div>
 
     <div class="flex items-center gap-4 max-md:hidden">

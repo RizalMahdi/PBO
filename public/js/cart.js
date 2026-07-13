@@ -9,18 +9,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateNavBadge(count) {
         const navCartBtn = document.getElementById('navCartBtn');
-        if (!navCartBtn) return;
-        let badge = navCartBtn.querySelector('span');
-        if (count > 0) {
-            if (!badge) {
-                badge = document.createElement('span');
-                badge.className = 'absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full';
-                navCartBtn.appendChild(badge);
+        if (navCartBtn) {
+            let badge = navCartBtn.querySelector('span');
+            if (count > 0) {
+                if (!badge) {
+                    badge = document.createElement('span');
+                    badge.className = 'absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full';
+                    navCartBtn.appendChild(badge);
+                }
+                badge.textContent = count;
+            } else {
+                if (badge) badge.remove();
             }
-            badge.textContent = count;
-        } else {
-            if (badge) badge.remove();
         }
+        document.querySelectorAll('.cart-badge-mobile').forEach(badge => {
+            if (count > 0) {
+                badge.textContent = count;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        });
     }
 
     // ── Cart Sidebar ──
@@ -47,6 +56,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (navCartBtn) navCartBtn.addEventListener('click', openCart);
+    document.querySelectorAll('.nav-cart-btn-mobile').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const nav = document.getElementById('navLinks');
+            if (nav) { nav.classList.add('hidden'); nav.classList.remove('flex'); }
+            openCart();
+        });
+    });
     if (cartBackdrop) cartBackdrop.addEventListener('click', closeCart);
     if (cartClose) cartClose.addEventListener('click', closeCart);
 

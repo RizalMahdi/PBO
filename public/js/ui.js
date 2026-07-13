@@ -14,6 +14,14 @@ document.addEventListener('DOMContentLoaded', function () {
             navLinks.classList.toggle('hidden');
             navLinks.classList.toggle('flex');
         });
+        document.addEventListener('click', function (e) {
+            const isMobile = window.matchMedia('(max-width: 767px)').matches;
+            if (!isMobile) return;
+            if (!navLinks.classList.contains('flex')) return;
+            if (navLinks.contains(e.target) || navToggle.contains(e.target)) return;
+            navLinks.classList.add('hidden');
+            navLinks.classList.remove('flex');
+        });
     }
 
     // ── Scroll to Products ──
