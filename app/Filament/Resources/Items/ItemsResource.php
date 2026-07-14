@@ -9,6 +9,7 @@ use App\Filament\Resources\Items\Schemas\ItemsForm;
 use App\Filament\Resources\Items\Tables\ItemsTable;
 use App\Models\Items;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -18,9 +19,21 @@ class ItemsResource extends Resource
 {
     protected static ?string $model = Items::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocument;
+    protected static string | UnitEnum | null $navigationGroup = 'Shop';
 
-    protected static ?string $recordTitleAttribute = 'items';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShoppingBag;
+
+    protected static ?string $recordTitleAttribute = 'Items';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return static::getModel()::count() < 5 ? 'warning' : 'success';
+    }
 
     public static function form(Schema $schema): Schema
     {

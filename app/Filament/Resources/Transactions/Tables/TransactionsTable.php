@@ -15,7 +15,7 @@ class TransactionsTable
             ->columns([
                 TextColumn::make('id')
                     ->label('Invoice')
-                    ->prefix('#')
+                    ->prefix('#TS-00')
                     ->sortable(),
                 TextColumn::make('customer_name')
                     ->searchable()
