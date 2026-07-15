@@ -28,7 +28,7 @@ class ItemsForm
                     ->image()
                     ->disk('public')
                     ->directory('item-images')
-                    ->maxSize(1024),
+                    ->maxSize(2048),
             ]);
     }
 }
